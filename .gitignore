@@ -1,0 +1,16 @@
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+Dataset/
+PetImages/
+dataset/
+*.log
+*.tmp
+Thumbs.db
+Desktop.ini

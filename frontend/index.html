@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070b1b">
+  <title>Whisker — Cat & Dog Classifier</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Whisker home">
+        <span class="brand-mark" aria-hidden="true">✿</span>
+        <span>Whisker<span class="brand-dot">.</span><small>AI PET CLASSIFIER</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#home">Home</a>
+        <a class="nav-link" href="#predict">Predict</a>
+        <a class="nav-link" href="#history">History <span class="history-count">0</span></a>
+      </nav>
+      <div class="header-actions">
+        <span class="api-status"><span class="status-dot"></span><span class="status-text">Checking AI</span></span>
+        <button class="theme-toggle" type="button" aria-label="Switch color theme">☼</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section-wrap" id="home">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="sparkle">✦</span> YOUR LITTLE AI PET EXPERT</span>
+          <h1>One photo.<br>Two <span class="gradient-text">adorable</span><br>possibilities.</h1>
+          <p class="hero-description">Curious who's in the picture? Drop in a photo and let our CNN tell you if it's a cat or a dog.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#predict">Try the classifier <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#about">Meet the model <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-stats">
+            <div><span class="stat-icon purple">✦</span><span><strong>AI powered</strong><small>Convolutional neural net</small></span></div>
+            <div><span class="stat-icon blue">◷</span><span><strong>Super speedy</strong><small>Results in a few seconds</small></span></div>
+            <div><span class="stat-icon mint">♡</span><span><strong>Made for pets</strong><small>Two classes, lots of love</small></span></div>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="A cat and dog ready to be classified">
+          <div class="art-orbit orbit-one"></div>
+          <div class="art-orbit orbit-two"></div>
+          <span class="float-spark spark-one">✦</span><span class="float-spark spark-two">✧</span>
+          <div class="pet-photo cat-photo"><img src="/samples/cat" alt="A curious tabby cat"></div>
+          <div class="pet-photo dog-photo"><img src="/samples/dog" alt="A fluffy white dog"></div>
+          <div class="art-caption"><span class="caption-dot"></span> YOUR NEXT BEST GUESS IS ONE PHOTO AWAY</div>
+          <div class="floating-chip"><span>✧</span> paws-itively clever</div>
+        </div>
+      </section>
+
+      <section class="section-wrap predict-section" id="predict">
+        <div class="section-heading">
+          <div><span class="eyebrow">THE FUN PART</span><h2>Who's that <span class="gradient-text">cutie?</span></h2></div>
+          <p>Upload a photo and our model will take a closer look.</p>
+        </div>
+        <div class="predict-layout">
+          <div class="upload-card">
+            <div class="upload-intro">
+              <span class="upload-icon" aria-hidden="true">↑</span>
+              <div><h3>Drop your photo here</h3><p>or choose one from your device</p></div>
+            </div>
+            <label class="dropzone" id="dropzone" for="file-input" tabindex="0">
+              <input id="file-input" type="file" accept="image/jpeg,image/png,image/webp,image/bmp">
+              <span class="drop-icon" aria-hidden="true">▧</span>
+              <strong>Drag & drop an image</strong>
+              <span class="drop-subtitle">or click to browse your files</span>
+              <span class="format-note">JPG, PNG, WEBP · up to 5 MB</span>
+            </label>
+            <div class="upload-footer"><span><i class="tiny-shield">✓</i> Your photos stay on your device</span><span>Best with one clear pet</span></div>
+            <div class="sample-row"><span>Just looking?</span><button type="button" class="sample-button" data-sample="cat">Try a cat</button><span class="sample-divider">·</span><button type="button" class="sample-button" data-sample="dog">Try a dog</button></div>
+          </div>
+
+          <aside class="tips-card">
+            <span class="tips-icon" aria-hidden="true">✧</span>
+            <span class="eyebrow">A LITTLE PHOTO MAGIC</span>
+            <h3>For a better guess</h3>
+            <ul>
+              <li><span>✓</span> Choose a clear, well-lit image</li>
+              <li><span>✓</span> Make sure your pet is in frame</li>
+              <li><span>✓</span> Cats and dogs are both welcome</li>
+              <li><span>✓</span> JPG, PNG, WEBP or BMP</li>
+            </ul>
+            <div class="tips-note">Made with curiosity <span>♡</span></div>
+          </aside>
+        </div>
+
+        <div class="result-card" id="result-card" aria-live="polite" hidden>
+          <div class="result-image-wrap"><img id="result-image" alt="Your uploaded pet"></div>
+          <div class="result-content">
+            <span class="result-badge"><span class="status-dot"></span><span id="result-state">LOOK WHAT WE FOUND</span></span>
+            <span class="result-kicker">OUR BEST GUESS IS...</span>
+            <h3 id="result-label">Dog!</h3>
+            <div class="confidence-row"><span>Confidence</span><strong id="result-confidence">—</strong></div>
+            <div class="confidence-track"><span id="confidence-bar"></span></div>
+            <p class="result-footnote" id="result-footnote">The model has had a good look.</p>
+            <div class="result-actions">
+              <button class="button button-primary" id="another-button" type="button">↻ &nbsp; Try another</button>
+              <a class="button button-quiet" href="#history">◷ &nbsp; View history</a>
+            </div>
+          </div>
+        </div>
+        <p class="error-message" id="error-message" role="alert" hidden></p>
+      </section>
+
+      <section class="section-wrap history-section" id="history">
+        <div class="section-heading">
+          <div><span class="eyebrow">AWW, REMEMBER THIS ONE?</span><h2>Your recent <span class="gradient-text">friends</span></h2></div>
+          <button class="clear-button" id="clear-history" type="button">Clear history</button>
+        </div>
+        <div class="history-grid" id="history-grid"></div>
+        <div class="empty-history" id="empty-history"><span aria-hidden="true">♡</span><strong>No little friends just yet</strong><p>Your predictions will show up here when you try the classifier.</p><a href="#predict" class="text-link">Find your first friend →</a></div>
+      </section>
+
+      <section class="section-wrap about-section" id="about">
+        <div class="about-copy">
+          <span class="eyebrow">A LITTLE ABOUT THE MAGIC</span>
+          <h2>Curiosity, meet <span class="gradient-text">convolution.</span></h2>
+          <p>Whisker uses a convolutional neural network trained to spot the visual patterns that make cats cats and dogs dogs. It’s a playful project built to make image classification feel a little more delightful.</p>
+        </div>
+        <div class="feature-list">
+          <div><span class="feature-icon">✦</span><span><strong>One easy upload</strong><small>Choose a photo or drop it right in</small></span></div>
+          <div><span class="feature-icon">◉</span><span><strong>A confidence score</strong><small>See how sure the model feels</small></span></div>
+          <div><span class="feature-icon">♡</span><span><strong>Made for cat people and dog people</strong><small>Your recent guesses stay in this browser</small></span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"><a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">✿</span><span>Whisker<span class="brand-dot">.</span></span></a><span>A little machine learning, a lot of love. <span class="footer-heart">♡</span></span><a class="back-top" href="#home">Back to the top ↑</a></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
